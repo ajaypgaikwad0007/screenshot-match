@@ -52,6 +52,6 @@ describe("recommendation engine", () => {
     expect(generateDay(foods, o)).toEqual(generateDay(foods, o));
   });
   it("scales nutrition by quantity", () => {
-    expect(scale(foods[0], 1.5).calories).toBe(300);
+    expect(scale(foods[0]!, 1.5).calories).toBe(300);
   });
 });
