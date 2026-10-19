@@ -14,16 +14,308 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      diet_plan_items: {
+        Row: {
+          diet_plan_id: string
+          food_id: string
+          id: string
+          meal_date: string
+          meal_type: string
+          serving_quantity: number
+        }
+        Insert: {
+          diet_plan_id: string
+          food_id: string
+          id?: string
+          meal_date: string
+          meal_type: string
+          serving_quantity: number
+        }
+        Update: {
+          diet_plan_id?: string
+          food_id?: string
+          id?: string
+          meal_date?: string
+          meal_type?: string
+          serving_quantity?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "diet_plan_items_diet_plan_id_fkey"
+            columns: ["diet_plan_id"]
+            isOneToOne: false
+            referencedRelation: "diet_plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "diet_plan_items_food_id_fkey"
+            columns: ["food_id"]
+            isOneToOne: false
+            referencedRelation: "foods"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      diet_plans: {
+        Row: {
+          created_at: string
+          daily_calorie_target: number
+          end_date: string
+          id: string
+          start_date: string
+          status: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          daily_calorie_target: number
+          end_date: string
+          id?: string
+          start_date: string
+          status?: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          daily_calorie_target?: number
+          end_date?: string
+          id?: string
+          start_date?: string
+          status?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      foods: {
+        Row: {
+          allergens: string[]
+          calories: number
+          carbohydrates: number
+          category: string
+          created_at: string
+          description: string | null
+          dietary_type: string
+          fat: number
+          fiber: number | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          meal_slots: string[]
+          name: string
+          protein: number
+          serving_size: number
+          serving_unit: string
+          updated_at: string
+        }
+        Insert: {
+          allergens?: string[]
+          calories: number
+          carbohydrates?: number
+          category: string
+          created_at?: string
+          description?: string | null
+          dietary_type: string
+          fat?: number
+          fiber?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          meal_slots?: string[]
+          name: string
+          protein?: number
+          serving_size: number
+          serving_unit?: string
+          updated_at?: string
+        }
+        Update: {
+          allergens?: string[]
+          calories?: number
+          carbohydrates?: number
+          category?: string
+          created_at?: string
+          description?: string | null
+          dietary_type?: string
+          fat?: number
+          fiber?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          meal_slots?: string[]
+          name?: string
+          protein?: number
+          serving_size?: number
+          serving_unit?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      meal_logs: {
+        Row: {
+          created_at: string
+          food_id: string
+          id: string
+          logged_date: string
+          meal_type: string
+          quantity: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          food_id: string
+          id?: string
+          logged_date?: string
+          meal_type: string
+          quantity: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          food_id?: string
+          id?: string
+          logged_date?: string
+          meal_type?: string
+          quantity?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "meal_logs_food_id_fkey"
+            columns: ["food_id"]
+            isOneToOne: false
+            referencedRelation: "foods"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          activity_level: string | null
+          age: number | null
+          allergies: string[]
+          calc_basis: string | null
+          created_at: string
+          dietary_preference: string | null
+          email: string | null
+          exclusions: string[]
+          fitness_goal: string | null
+          full_name: string
+          gender: string | null
+          height_cm: number | null
+          id: string
+          is_active: boolean
+          meals_per_day: number
+          medical_flag: boolean
+          updated_at: string
+          water_goal_l: number | null
+          weight_kg: number | null
+        }
+        Insert: {
+          activity_level?: string | null
+          age?: number | null
+          allergies?: string[]
+          calc_basis?: string | null
+          created_at?: string
+          dietary_preference?: string | null
+          email?: string | null
+          exclusions?: string[]
+          fitness_goal?: string | null
+          full_name?: string
+          gender?: string | null
+          height_cm?: number | null
+          id: string
+          is_active?: boolean
+          meals_per_day?: number
+          medical_flag?: boolean
+          updated_at?: string
+          water_goal_l?: number | null
+          weight_kg?: number | null
+        }
+        Update: {
+          activity_level?: string | null
+          age?: number | null
+          allergies?: string[]
+          calc_basis?: string | null
+          created_at?: string
+          dietary_preference?: string | null
+          email?: string | null
+          exclusions?: string[]
+          fitness_goal?: string | null
+          full_name?: string
+          gender?: string | null
+          height_cm?: number | null
+          id?: string
+          is_active?: boolean
+          meals_per_day?: number
+          medical_flag?: boolean
+          updated_at?: string
+          water_goal_l?: number | null
+          weight_kg?: number | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      weight_logs: {
+        Row: {
+          created_at: string
+          id: string
+          recorded_date: string
+          user_id: string
+          weight_kg: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          recorded_date?: string
+          user_id: string
+          weight_kg: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          recorded_date?: string
+          user_id?: string
+          weight_kg?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +442,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
