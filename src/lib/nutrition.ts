@@ -230,7 +230,7 @@ export function buildMeal(pool: Food[], meal: MealType, kcalTarget: number, vari
   const picked: Food[] = [];
   for (const cats of MEAL_TEMPLATE[meal]) {
     const c = candidates(pool, meal, cats).filter((f) => !picked.includes(f));
-    if (c.length) picked.push(c[variant % c.length]);
+    const pick = c[variant % c.length]; if (pick) picked.push(pick);
   }
   if (!picked.length) return [];
   const base = picked.reduce((s, f) => s + Number(f.calories), 0);
@@ -260,5 +260,5 @@ export function alternativeFor(foods: Food[], item: PlanItem, diet: Diet, allerg
   const c = candidates(pool, item.meal_type, [item.food.category]);
   if (c.length < 2) return null;
   const idx = c.findIndex((f) => f.id === item.food.id);
-  return c[(idx + 1) % c.length];
+  return c[(idx + 1) % c.length] ?? null;
 }
