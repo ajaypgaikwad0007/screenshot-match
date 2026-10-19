@@ -6,7 +6,7 @@ describe("Mifflin-St Jeor", () => {
     expect(bmr({ age: 30, heightCm: 175, weightKg: 70, basis: "male" })).toBe(1648.75);
   });
   it("female BMR", () => {
-    expect(bmr({ age: 30, heightCm: 160, weightKg: 60, basis: "female" })).toBe(1314);
+    expect(bmr({ age: 30, heightCm: 160, weightKg: 60, basis: "female" })).toBe(1289);
   });
   it("applies moderate multiplier 1.55 and maintenance target", () => {
     const r = calculate({ age: 30, heightCm: 175, weightKg: 70, basis: "male", activity: "moderate", goal: "maintain" });
